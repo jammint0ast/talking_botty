@@ -1,6 +1,8 @@
 import pvporcupine
 from pvrecorder import PvRecorder
 from datetime import datetime
+from main_game import ChooseGame
+import difflib
 
 import speech_recognition as sr
 r = sr.Recognizer()
@@ -31,6 +33,8 @@ porcupine = pvporcupine.create(
   keyword_paths=keyword_paths
 )
 
+playgame_choices = ("let's play a game", "play a game", "play something", "game", "let's play", "how about we play a game")
+
 recorder = PvRecorder(device_index=-1, frame_length=porcupine.frame_length)
 recorder.start()
 
@@ -47,8 +51,10 @@ while True:
       recorder.stop()
       engine.say("Yes Captain?")
       engine.runAndWait()
-      input = get_speech_input()
-      print(input)
+      speech_text = get_speech_input()
+      print(speech_text)
+      if difflib.get_close_matches(speech_text.lower(), playgame_choices):
+        ChooseGame(input_method=get_speech_input)
       recorder.start()
         
 

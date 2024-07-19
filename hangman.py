@@ -9,11 +9,12 @@ words = ("dogs", "sun", "pizza", "deoxyribonucleic", "university")
 dashes = "-" * len(secret)
 
 
-def game_hang():
+def game_hang(input_method=input):
     global dashes
     tries = 10
     while tries > 0 :
-      guess = input("Guess a letter:")
+      sayit("Guess a letter:")
+      guess = input_method()
       if len(guess) !=1: 
 
         sayit ("You must only answer one letter at the time. Try again")
