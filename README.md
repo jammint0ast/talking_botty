@@ -21,5 +21,5 @@ python hey_robby.py
 # TODO
  
 - Try out https://github.com/m-bain/whisperX
-- Connect to an LLM.
+- Connect to an LLM. Specifically, I think the new https://mistral.ai/news/mistral-nemo/
 - Try better TTS.
