@@ -3,10 +3,14 @@ from pvrecorder import PvRecorder
 from datetime import datetime
 from main_game import ChooseGame
 import difflib
+import sounddevice
+
 
 import speech_recognition as sr
 r = sr.Recognizer()
-mic = sr.Microphone(sample_rate=22050)
+mic_devices = sr.Microphone.list_microphone_names()
+mic_device = mic_devices.index("default")
+mic = sr.Microphone(device_index=mic_device, sample_rate=22050)
 
 import pyttsx3
 engine = pyttsx3.init()

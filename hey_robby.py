@@ -2,16 +2,25 @@ import pvporcupine
 from pvrecorder import PvRecorder
 from datetime import datetime
 
+import sounddevice
+
+
 import speech_recognition as sr
 r = sr.Recognizer()
-mic = sr.Microphone(sample_rate=22050)
+mic_devices = sr.Microphone.list_microphone_names()
+mic_device = mic_devices.index("default")
+mic = sr.Microphone(device_index=mic_device, sample_rate=22050)
 
+with mic as source:
+    r.adjust_for_ambient_noise(source)
+    #audio = r.listen(source)
+        
 import pyttsx3
 engine = pyttsx3.init()
 
 def get_speech_input(language="english", model="small.en"):
     with mic as source:
-        r.adjust_for_ambient_noise(source)
+        #r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
     return r.recognize_whisper(audio, language=language, model=model)
 
